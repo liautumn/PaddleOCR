@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+    paddlex-ocr:
+        image: ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlex/hps:paddlex3.3-cpu
+        container_name: paddlex-ocr-service
+        command: paddlex --serve --pipeline /root/ocr/ocr_config.yaml
+        environment:
+            - PADDLEX_HPS_DEVICE_TYPE=cpu
+            - PADDLEX_HPS_USE_HPIP=1
+        volumes:
+            - ./ocr:/root/ocr
+        network_mode: host
+        shm_size: 8g
+        restart: unless-stopped
